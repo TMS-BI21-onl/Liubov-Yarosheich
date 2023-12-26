@@ -1,0 +1,53 @@
+1)
+--a)
+SELECT*
+FROM Sales.SalesTerritory
+
+--b)
+SELECT TerritoryID, Name
+FROM Sales.SalesTerritory
+
+--c)
+SELECT*
+FROM Person.Person
+WHERE lastName = 'Norman'
+
+--d)
+SELECT*
+FROM Person.Person
+WHERE EmailPromotion != 2
+
+3) COUNT_BIG
+   APPROX_COUNT_DISTINCT - ПРИБЛИЗИТЕЛЬНОЕ КОЛИЧЕСТВО УНИКАЛЬНЫХ ЗНАЧЕНИЙ, НЕ РАВНОЕ NULL
+   VAR
+
+4) 
+--a) 
+SELECT DISTINCT PersonType
+FROM Person.Person
+WHERE LastName LIKE 'M%' OR EmailPromotion != 1
+
+--b) 
+SELECT top 3 DiscountPct
+FROM Sales.SpecialOffer 
+WHERE StartDate >='2013-01-01' AND EndDate <='2014-01-01'
+
+--C)
+SELECT MIN(Weight) AS 'MinWeight', MAX(Size) AS 'MaxSize'
+FROM Production.Product
+
+
+--D) 
+SELECT ProductSubcategoryID, MIN(Weight) AS 'MinWeight', MAX(Size) AS 'MaxSize'
+FROM Production.Product
+WHERE Weight IS NOT NULL AND Size IS NOT NULL
+GROUP BY ProductSubcategoryID
+
+--E)
+SELECT ProductSubcategoryID, MIN(Weight) AS 'MinWeight', MAX(Size) AS 'MaxSize'
+FROM Production.Product
+WHERE Weight IS NOT NULL AND Size IS NOT NULL AND Color IS NOT NULL
+GROUP BY ProductSubcategoryID 
+
+
+   
