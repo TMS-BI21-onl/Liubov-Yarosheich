@@ -1,0 +1,61 @@
+2.-а)
+SELECT name,
+      CASE WHEN StandardCost in (0, null) THEN 'not for sale' 
+	   WHEN StandardCost between 0 and 100 THEN '<$100'  
+           WHEN StandardCost between 100 and 500 THEN '<$500'
+	   ELSE '>=$500'
+	   END AS PriceRange
+FROM Production.Product
+
+2.-b)
+SELECT t2.Name, t1.ProductID, t1.BusinessEntityID, t1.StandardPrice
+FROM Purchasing.ProductVendor t1
+INNER JOIN Purchasing.Vendor t2 on t2.BusinessEntityID = t1.BusinessEntityID
+where StandardPrice>10 and t2.name like 'N%' OR t2.name LIKE '%X%'
+
+2.-с)
+
+SELECT BusinessEntityID
+FROM Purchasing.Vendor  
+EXCEPT 
+SELECT BusinessEntityID
+FROM Purchasing.ProductVendor
+
+3.-а)
+
+SELECT t1.name, StandardCost
+FROM Production.ProductModel t1 
+     JOIN Production.Product t2
+     ON t1.Name = t2.name
+WHERE t2.name LIKE 'LL%'
+
+3.-b)
+
+SELECT DISTINCT t1.BusinessEntityID, t1.name
+FROM Purchasing.Vendor t1
+     LEFT join Sales.Store t2
+     ON t1.BusinessEntityID = t2.BusinessEntityID
+ORDER BY t1.name ASC
+
+3.-c)
+
+SELECT t1.name
+FROM Production.Product t1 
+     JOIN Sales.SpecialOfferProduct t2 ON t1.ProductID = t2.ProductID 
+     JOIN Sales.SpecialOffer t3 ON t2.SpecialOfferID = t3.SpecialOfferID
+GROUP BY t1.name
+HAVING COUNT(t3.SpecialOfferID) > 1
+
+
+4. GETDATE () - Возвращает текущую системную метку времени базы данных в виде значения datetime без смещения часового пояса базы данных
+   DATENAME ( datepart , date ) - возвращает строку символов, представляющую указанную часть datepart заданного типа date
+   DATEPART ( datepart , date ) -  возвращает целое число, представляющее указанную часть datepart заданного типа date.
+   DAY ( date ) - возвращает целое число, представляющее дату (день месяца) указанного значения типа date
+   MONTH ( date ) - возвращает целое число, представляющее месяц указанной даты date
+   YEAR ( date ) - Возвращает целое число, представляющее год указанной даты
+   DATEDIFF ( datepart , startdate , enddate ) - возвращает количество пересеченных границ (целое число со знаком), указанных в аргументе 
+                                                 datepart, за период времени, указанный в аргументах startdate и enddate.
+   DATEADD (datepart , number , date ) - добавляет number (целое число со знаком) в область datepartдаты ввода и возвращает измененное 
+                                         значение даты или времени
+   EOMONTH ( start_date [ , month_to_add ] )- возвращает последний день месяца, содержащего указанную дату, с необязательным смещением.
+
