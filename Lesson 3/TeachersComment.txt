@@ -1,0 +1,16 @@
+Well done!
+
+2.a
+Null doesn't work correctly with IN. Because it 's the same as "=NULL".
+
+2.b
+Name conditions should be divided by ( ), because at least one of them should definetily be correct.
+
+2.c
+You had the scheme for this task, please use it.
+Your solution will return correct results. But what if we want to see names? I'm not sure that we have Vendor name in ProductVendor.
+
+3.b
+It's not one list. We want to see one column with all names+stores.
+
+It would be great to rewrite the solution for 2c. :)
