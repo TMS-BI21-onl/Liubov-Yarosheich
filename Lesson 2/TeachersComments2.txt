@@ -1,3 +1,7 @@
-Where is HW?
-The file is empty.
-Please, do the homework.
+Well done!
+
+4.a
+EmailPromotion sholud be filteres with LIKE.
+
+4.d,e
+There is nothing said about "Weight and Size should not be NULL".
