@@ -1,7 +1,0 @@
-2. -c)
-
-SELECT name
-FROM Purchasing.Vendor
-EXCEPT
-SELECT BusinessEntityID
-FROM Purchasing.ProductVendor

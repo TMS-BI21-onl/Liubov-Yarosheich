@@ -1,0 +1,14 @@
+2. -c)
+
+SELECT name
+FROM Purchasing.Vendor
+EXCEPT
+SELECT BusinessEntityID
+FROM Purchasing.ProductVendor
+
+3. -b)
+SELECT DISTINCT t1.BusinessEntityID, t1.name, t2.name
+FROM Purchasing.Vendor t1
+     FULL JOIN Sales.Store t2
+     ON t1.BusinessEntityID = t2.BusinessEntityID
+ORDER BY t1.name ASC, t2.name ASC
