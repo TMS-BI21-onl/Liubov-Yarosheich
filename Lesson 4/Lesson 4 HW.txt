@@ -1,0 +1,81 @@
+--3 
+При каких значениях оконные функции Row Number, Rank и Dense Rank вернут одинаковый результат?
+
+если все значения не равны(уникальны), а каждое следующее больше предыдущего
+
+--4-
+--SOLUTION A) 
+INSERT INTO Production.UnitMeasure (UnitMeasureCode, name, ModifiedDate)
+VALUES ('TT1', 'Test1', '2020-09-09'), ('TT2', 'Test2', getdate())
+
+
+--SOLUTION B)
+SELECT UnitMeasureCode, name, ModifiedDate
+INTO Production.UnitMeasureTest
+FROM Production.UnitMeasure
+WHERE name in ('Test1','Test2')	
+
+--
+INSERT INTO Production.UnitMeasureTest (UnitMeasureCode, name, ModifiedDate)
+SELECT UnitMeasureCode, name, ModifiedDate
+FROM Production.UnitMeasure
+WHERE UnitMeasureCode = 'CAN'	 
+
+SELECT *
+FROM Production.UnitMeasureTest
+WHERE UnitMeasureCode = 'CAN' 
+
+--SOLUTION C)
+UPDATE Production.UnitMeasureTest
+SET UnitMeasureCode = 'TTT' 
+WHERE UnitMeasureCode <> 'TTT' 
+
+--SOLUTION D)
+DELETE 
+FROM Production.UnitMeasureTest 
+
+--SOLUTION E)
+SELECT *
+FROM Sales.SalesOrderDetail
+WHERE SalesOrderID in ('43659','43664')
+
+SELECT SalesOrderID, LineTotal,
+       MIN (LineTotal) OVER (PARTITION BY SalesOrderID) AS MIN_LineTotal,
+	   MAX (LineTotal) OVER (PARTITION BY SalesOrderID) AS MAX_LineTotal,
+	   AVG (LineTotal) OVER (PARTITION BY SalesOrderID) AS AVG_LineTotal
+FROM Sales.SalesOrderDetail
+WHERE SalesOrderID in ('43659','43664')
+
+--SOLUTION F)
+
+SELECT *
+FROM Sales.vSalesPerson
+
+
+SELECT BusinessEntityID, salesYTD,
+CONCAT_WS(LastName,'    ',TerritoryGroup) AS Login,
+RANK () OVER (ORDER BY salesYTD DESC) AS Rank
+FROM Sales.vSalesPerson
+
+
+SELECT BusinessEntityID, saleslastyear, 
+CONCAT_WS(LastName,'    ',TerritoryGroup) AS Login,
+RANK () OVER (ORDER BY saleslastyear DESC) AS Rank
+FROM Sales.vSalesPerson
+
+--SOLUTION G)
+
+
+SELECT CASE
+         WHEN Datename(dw, Dateadd(dd, -Datepart(dd, Getdate()) + 1, Getdate())) = 'Saturday' THEN Dateadd(dd, -Datepart(dd, Getdate()) + 3, Getdate())
+         WHEN Datename(dw, Dateadd(dd, -Datepart(dd, Getdate()) + 1, Getdate())) = 'Sunday' THEN Dateadd(dd, -Datepart(dd, Getdate()) + 2, Getdate())
+         ELSE Dateadd(dd, -Datepart(dd, Getdate()) + 1, Getdate())
+       END
+
+
+
+--5
+Id(PK)   Name		DepName
+4        2          3
+--NULL не считаются
+
