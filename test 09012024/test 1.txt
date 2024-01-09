@@ -1,0 +1,33 @@
+1
+SELECT *
+FROM водители
+WHERE Стаж !=3,Стаж !=5, Стаж !=6, Стаж !=3 AND место прописки LIKE'eee'
+
+2
+SELECT DISTINCT №паспорта 
+FROM Водители В
+LEFT JOIN ДИСПЕТЧЕРСКАЯ Д ON В КОД ВОДИТЕЛЯ = Д КОД ВОДИТЕЛЯ
+WHERE КОД АВТО IS NULL
+
+3
+SELECT а.регистрационный номер, д.время прибытия, д.время отбытия, м.пункт назначения 
+FROM автомобили а
+INNER JOIN диспетческая д ON а.код авто = д.код авто
+INNER JOIN маршруты м ON д.путевка = м.код маршрута
+WHERE а.год выпуска авто = '2015'  
+
+2 ЧАСТЬ
+1
+SELECT COUNT (*)
+from employee
+WHERE first_name
+ORDER BY first_name
+HAVING COUNT (*) >1
+
+2
+
+
+3
+SELECT first_name, last name
+from employee
+WHERE manageR_ID IS NULL 
