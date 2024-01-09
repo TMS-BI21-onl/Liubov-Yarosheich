@@ -1,0 +1,4 @@
+Well done!
+
+5
+There was another question - not to count for each column, but to count specific sets.
