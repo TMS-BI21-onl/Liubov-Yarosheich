@@ -1,0 +1,50 @@
+
+CREATE TABLE Patients
+(
+    ID              INT IDENTITY NOT NULL,
+    FirstName		CHAR(100), 
+    LastName		NVARCHAR(100), 
+    SSN      		CHAR(100),
+	Email AS LEFT(FirstName,1) + SUBSTRING(LastName,2,3) + '@mail.com',
+	Temp            INT,
+	CreatedDate     DATE
+);
+
+INSERT INTO Patients (FirstName, LastName, SSN, Temp, CreatedDate)
+VALUES ('Lina','Sedova','SSN5','37','2023-10-01'),
+       ('Alina','Cat','SSN6','36','2023-10-01'),
+	   ('Victor','Durcoff','SSN2','38','2023-10-01'),
+	   ('Katya','Piterskaya','SSN1','39','2023-10-01'), 
+	   ('Nicolay','Baranof','SSN8','36','2023-10-01')
+
+	   
+ALTER TABLE Patients
+ADD TempType AS (CASE WHEN Temp < 37 THEN '< 37°C'
+                      WHEN Temp >= 37 THEN  '> 37°C'
+					  END) 
+                
+
+CREATE VIEW Patients_v
+     AS SELECT Temp * 9 / 5 + 32 AS F_Temp
+	  FROM Patients 
+
+CREATE FUNCTION Patients.ufn_F_temp (@temp INT)
+RETURNS TABLE
+AS
+RETURN 
+    (SELECT P.Temp, P.Temp * 9 / 5 + 32 AS 'F_temp'
+    FROM Patients AS P  
+    WHERE P.Temp = @temp);
+
+
+--задание 2.5 из проверочной работы
+SELECT e.first_name, 
+       CASE 
+	WHEN j.END_DATE IS NOT NULL THEN 'Left the company at' + j.END_DATE
+	WHEN j.END_DATE IS NULL THEN 'Currently Working'
+        END AS status
+FROM Employees e 
+JOIN job_history j on e.employee_id = j.employee_id
+	   
+
+
