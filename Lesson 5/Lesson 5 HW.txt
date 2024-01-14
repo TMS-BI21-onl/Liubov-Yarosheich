@@ -28,6 +28,8 @@ CREATE VIEW Patients_v
      AS SELECT Temp * 9 / 5 + 32 AS F_Temp
 	  FROM Patients 
 
+CREATE SCHEMA Patients;
+
 CREATE FUNCTION Patients.ufn_F_temp (@temp INT)
 RETURNS TABLE
 AS
