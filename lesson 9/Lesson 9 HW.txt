@@ -1,0 +1,20 @@
+CREATE TABLE People 
+(
+	id		INT PRIMARY KEY IDENTITY,
+	first_name	VARCHAR(50),
+	last_name	VARCHAR(50),
+	id_father	VARCHAR(50),
+	id_mother	VARCHAR(50),
+	);
+
+INSERT INTO People (first_name, last_name, id_father, id_mother)
+VALUES ('Dmitry','Sedov','Sergey Sedov','Anna Sedova'),
+       ('Alina','Sedova','Egor Sedov','AnnaSedova'),
+	   ('Victor','Durcoff','Anatoly Durcoff','Elena Durcoff'),
+	   ('Dmitry','Pitersky','Egor Pitersky','Margo Pitersky'), 
+	   ('Nicolay','Baranof','Vladimir Baranof','Anna Sedova')
+
+
+SELECT first_name, last_name, id_father
+FROM People
+WHERE first_name = 'Dmitry'
