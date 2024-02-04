@@ -1,0 +1,10 @@
+SELECT year_ AS year, [12] AS december, [1] AS jenuary, [2] AS february
+FROM (SELECT YEAR(DueDate) AS year_, month(DueDate) AS month_, OrderQty 
+      FROM Production.WorkOrder
+	  WHERE OrderQty IS NOT NULL AND month(DueDate) IN (1,2,12)
+	  ) AS SourceTable
+PIVOT 
+       (SUM(OrderQty) 
+       FOR month_ IN ([12], [1], [2])
+	   ) AS PivotTable
+ORDER BY year_
