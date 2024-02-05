@@ -1,0 +1,6 @@
+DECLARE @NationalIDNumber VARCHAR (50); 
+SET @NationalIDNumber = '879341111'
+
+UPDATE HumanResources.Employee
+SET NationalIDNumber = @NationalIDNumber
+WHERE BusinessEntityID = 15 
