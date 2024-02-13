@@ -1,0 +1,40 @@
+--1
+INSERT INTO manufacture (name, country_id)
+VALUES ('HP','4')
+
+--2 
+UPDATE user
+   SET age = age/3
+ WHERE name = 'Андрей'
+
+
+ --3
+--3.1
+ SELECT name
+ from product
+ HAVING MAX(price)
+--3.2
+ SELECT NAME, MAX(price) OVER () AS max_price
+ FROM product
+ WHERE price =  max_price
+--3.3
+ SELECT name,
+ FROM product
+ WHERE price = (SELECT DISTINCT price DESC
+                 FROM product
+				 TOP 1)
+
+ --4
+ SELECT name.u, LEFT(name.p, 2), RIGHT(name.p, 1) 
+ FROM user u 
+      JOIN phone p ON id.u = user_id.p
+ where LEFT(name.p, 2) = '+3' AND RIGHT(name.p, 1) = '4' OR age.u > '35'
+ 
+ --5 
+ SELECT name.u, 
+ FROM user u 
+      JOIN order o ON id.u = user_id.o, 
+	  (SELECT COUNT(user_id.o) OVER () AS count_us
+	  FROM order o
+	  GROUP BY user_id.o)
+  TOP 5
