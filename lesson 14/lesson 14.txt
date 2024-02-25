@@ -1,0 +1,33 @@
+/* 1.	Для своей базы данных создайте объект для нахождения общего рейтинга топ 50 врачей 
+за всю историю приемов, где рейтинг определяется количеством баллов 
+за количество приемов в день 
+(10 и более приемов – 3 балла, 5-10 – 2 балла, меньше 5 – 1 балл). */
+
+CREATE VIEW rating
+AS
+SELECT top 50 first_name, last_name, 
+                    CASE 
+                    WHEN cnt > 10 THEN '3'
+					WHEN cnt IN (10,5) THEN '2'
+					WHEN cnt < 5 THEN '1'
+					END as place  
+FROM dbo.staff,
+(
+      SELECT date_appointment, staff_id,
+	        COUNT(staff_id) as cnt 
+	  FROM dbo.MedicalRecord 
+	  GROUP BY date_appointment, staff_id
+) T 
+WHERE cnt = CASE 
+                    WHEN cnt > 10 THEN '3'
+					WHEN cnt IN (10,5) THEN '2'
+					WHEN cnt < 5 THEN '1'
+					END 
+            
+SELECT * FROM rating
+
+
+2. а - убрать легенду, заливки, сократить название таблицы
+   b - изменить на круговую диаграмму, убрать тени, убрать градиент
+   c - подписи сделать горизонтальными или перенести в легенду, вывести значения для каждого столбца
+
