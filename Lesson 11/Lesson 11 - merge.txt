@@ -1,0 +1,90 @@
+CREATE TABLE dbo.function_results
+           (function_name VARCHAR (50),
+	        function_COUNT VARCHAR (50))
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Alex              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Alex, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Alex, function_COUNT = 1;  
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Carlos              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Carlos, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Carlos, function_COUNT = 2;
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Charles              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Charles, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Charles, function_COUNT = 3; 
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Daniel              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Daniel, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Daniel, function_COUNT = 4; 
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Esteban              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Esteban, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Esteban, function_COUNT = 5; 
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Fred              
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Fred, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Fred, function_COUNT = 6;
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.George             
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.George, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.George, function_COUNT = 7;
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Lando             
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Lando, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Lando, function_COUNT = 8;
+
+MERGE INTO dbo.function_results target
+USING dbo.data_for_merge AS source
+ON function_name = source.Lewis             
+WHEN NOT MATCHED THEN
+INSERT (function_name, function_COUNT)              
+VALUES (source.Lewis, 1)                       
+WHEN MATCHED THEN
+UPDATE SET function_name = source.Lewis, function_COUNT = 9;
+
+SELECT *
+FROM dbo.function_results
+
+
+DROP TABLE dbo.function_results
